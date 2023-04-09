@@ -4,10 +4,8 @@ import android.content.ContentValues.TAG
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -39,6 +37,11 @@ class RegisterFragment : Fragment() {
         binding?.btnSignUp?.setOnClickListener {
             registerUser(binding?.etEmail?.text.toString(), binding?.etPassword?.text.toString())
         }
+
+        binding?.btnBack?.setOnClickListener {
+            findNavController().navigate(R.id.navigation_login)
+        }
+
         return binding?.root
     }
 

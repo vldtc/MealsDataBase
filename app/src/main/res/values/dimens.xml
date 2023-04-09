@@ -7,5 +7,5 @@
     <dimen name="fragment_vertical_margin">16dp</dimen>
     <dimen name="header_size">25sp</dimen>
     <dimen name="text_size">15sp</dimen>
-    <dimen name="edit_text_width">200dp</dimen>
+    <dimen name="edit_text_width">300dp</dimen>
 </resources>

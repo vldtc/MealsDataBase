@@ -1,18 +1,31 @@
 package com.example.mealsdatabase
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.mealsdatabase.databinding.ActivityMainBinding
+import com.firebase.ui.auth.AuthUI
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.delay
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var auth: FirebaseAuth
+    private lateinit var analytics: FirebaseAnalytics
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +34,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView
+        val signout = R.id.btnSignOut
+        auth = Firebase.auth
+        // Obtain the FirebaseAnalytics instance.
+        analytics = Firebase.analytics
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         // Passing each menu ID as a set of Ids because each
@@ -54,11 +71,45 @@ class MainActivity : AppCompatActivity() {
                     supportActionBar?.hide()
                     navView.visibility = View.GONE
                 }
+                R.id.navigation_register -> {
+                    supportActionBar?.hide()
+                    navView.visibility = View.GONE
+                }
                 else -> {
                     navView.visibility = View.GONE
                 }
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.custom_action_bar, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.btnSignOut -> {
+                Firebase.auth.signOut()
+                analytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundleOf(
+                    FirebaseAnalytics.Param.ITEM_ID to "signOut",
+                    FirebaseAnalytics.Param.ITEM_NAME to "userSignOutEvent",
+                    FirebaseAnalytics.Param.CONTENT_TYPE to "singOutClick"
+                ))
+
+
+                Toast.makeText(baseContext,
+                    "You have been signed out!",
+                    Toast.LENGTH_LONG)
+                    .show()
+                findNavController(R.id.nav_host_fragment_activity_main).navigate(R.id.navigation_login)
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+
+
+        }
+        return true
     }
 
     override fun onSupportNavigateUp(): Boolean {
