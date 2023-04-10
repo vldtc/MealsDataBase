@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/background_gradient"
     tools:context=".ui.login.LoginFragment">
 
     <TextView
         android:id="@+id/tvMealsDatabase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:fontFamily="sans-serif-condensed-medium"
         android:text="MealsDataBase"
         android:textColor="@color/white"
@@ -72,12 +72,16 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSignIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_background"
         android:text="Sign In"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="@dimen/text_size"
+        android:textColor="@color/white"
+        android:fontFamily="sans-serif-black"
+        app:layout_constraintStart_toStartOf="@+id/etPassword"
+        app:layout_constraintEnd_toEndOf="@+id/etPassword"
         app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
     <TextView
@@ -88,6 +92,7 @@
         android:fontFamily="sans-serif-condensed-medium"
         android:text="If you don't have an account, create one here"
         android:textSize="@dimen/text_size"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSignIn" />
@@ -95,9 +100,11 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSignUp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginTop="10dp"
+        android:background="@drawable/button_background"
         android:text="Register"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvRegisterTextInfo" />
@@ -110,19 +117,36 @@
         android:fontFamily="sans-serif-condensed-medium"
         android:text="Alternatively, login using one of these methods."
         android:textSize="@dimen/text_size"
+        android:layout_marginBottom="30dp"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSignUp" />
+        app:layout_constraintBottom_toTopOf="@id/btnGoogle" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnGoogle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Google LOGIN"
-        android:layout_marginTop="10dp"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:text="Login with GOOGLE"
+        android:drawableStart="@drawable/ic_google"
+        android:drawablePadding="10dp"
+        android:textColor="@color/white"
+        android:padding="10dp"
+        android:background="@drawable/button_background"
+        android:layout_marginBottom="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAltenateInfo" />
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/edit_text_background"
+        android:layout_marginBottom="15dp"
+        android:layout_marginHorizontal="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 
 

@@ -1,4 +1,4 @@
-package com.example.mealsdatabase
+package com.example.mealsdatabase.ui
 
 import android.os.Bundle
 import android.view.Menu
@@ -12,15 +12,16 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.mealsdatabase.R
 import com.example.mealsdatabase.databinding.ActivityMainBinding
-import com.firebase.ui.auth.AuthUI
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.delay
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -45,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_home,
-                R.id.navigation_dashboard,
+                R.id.navigation_categories,
                 R.id.navigation_notifications
             )
         )
@@ -59,7 +60,7 @@ class MainActivity : AppCompatActivity() {
                     navView.visibility = View.VISIBLE
                     supportActionBar?.show()
                 }
-                R.id.navigation_dashboard -> {
+                R.id.navigation_categories -> {
                     navView.visibility = View.VISIBLE
                     supportActionBar?.show()
                 }
