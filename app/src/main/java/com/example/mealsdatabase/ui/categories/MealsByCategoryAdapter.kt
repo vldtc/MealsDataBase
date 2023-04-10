@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.example.mealsdatabase.R
 import com.example.mealsdatabase.data.model.mealsbycategory.MealModel
 import com.example.mealsdatabase.databinding.ItemMealsByCategoryBinding
@@ -17,7 +18,10 @@ class MealsByCategoryAdapter(val meals: List<MealModel>?):
         fun handleData(item: MealModel?){
             item?.let {
                 with(it){
-                    binding.tv1.text = strMeal
+                    binding.tvName.text = strMeal
+                    binding.ivImage.load(
+                        data = "$strMealThumb"
+                    )
                 }
             }
         }
