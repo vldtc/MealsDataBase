@@ -40,7 +40,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="sans-serif-condensed-medium"
         android:maxLines="4"
-        android:text="Requirements for registering.\nAn valid email address must be used\n Password needs to be at least 8 characters long. Needs at least 1 capital letter, a number and a special character."
+        android:text="Requirements for registering.\nAn valid email address must be used\n Password needs to be at least 8 characters long.\n Needs at least 1 capital letter, a number and a special character."
         android:textSize="10sp"
         android:textColor="@color/white"
         android:gravity="center"

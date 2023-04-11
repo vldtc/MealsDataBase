@@ -3,7 +3,7 @@ package com.example.mealsdatabase.ui.notifications
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.mealsdatabase.data.model.repository.Repository
+import com.example.mealsdatabase.data.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

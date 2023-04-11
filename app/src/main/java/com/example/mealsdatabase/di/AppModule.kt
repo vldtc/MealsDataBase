@@ -1,9 +1,9 @@
 package com.example.mealsdatabase.di
 
-import com.example.mealsdatabase.data.model.remote.ApiDetails
-import com.example.mealsdatabase.data.model.remote.ApiRequest
-import com.example.mealsdatabase.data.model.repository.Repository
-import com.example.mealsdatabase.data.model.repository.RepositoryImpl
+import com.example.mealsdatabase.data.remote.ApiDetails
+import com.example.mealsdatabase.data.remote.ApiRequest
+import com.example.mealsdatabase.data.repository.Repository
+import com.example.mealsdatabase.data.repository.RepositoryImpl
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -51,14 +51,14 @@ class AppModule {
     @Provides
     fun provideApi(
         retrofit: Retrofit
-    ): ApiRequest{
+    ): ApiRequest {
         return retrofit.create(ApiRequest::class.java)
     }
 
     @Provides
     fun provideRepository(
         apiRequest: ApiRequest
-    ): Repository{
+    ): Repository {
         return RepositoryImpl(apiRequest)
     }
 }

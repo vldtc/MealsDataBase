@@ -2,7 +2,6 @@ package com.example.mealsdatabase.ui.login
 
 import android.app.Activity
 import android.content.ContentValues.TAG
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,10 +12,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.mealsdatabase.ui.MainActivity
 import com.example.mealsdatabase.R
 import com.example.mealsdatabase.databinding.FragmentLoginBinding
 import com.facebook.*
+import com.facebook.FacebookSdk.getApplicationContext
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -27,6 +28,8 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
+
 
 @AndroidEntryPoint
 @Suppress("DEPRECATION")
@@ -52,6 +55,32 @@ class LoginFragment : Fragment() {
             //Firebase Initialisation
         auth = Firebase.auth
 
+            //Facebook
+        FacebookSdk.sdkInitialize(getApplicationContext())
+
+        // Callback registration
+        val callbackManager = CallbackManager.Factory.create()
+
+        binding?.btnFacebook?.setOnClickListener {
+
+            LoginManager.getInstance().logInWithReadPermissions(this, listOf("email", "public_profile"))
+            LoginManager.getInstance().registerCallback(callbackManager, object: FacebookCallback<LoginResult> {
+                override fun onCancel() {
+                    Toast.makeText(context, "Cancel", Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onError(error: FacebookException) {
+                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onSuccess(result: LoginResult) {
+                    Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
+                    actionLoggedIn()
+                }
+
+            })
+        }
+
             //Google
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -65,8 +94,17 @@ class LoginFragment : Fragment() {
             signInGoogle()
         }
 
+        val email = binding?.etEmail?.text
+        val password =  binding?.etPassword?.text
+
         binding?.btnSignIn?.setOnClickListener {
-            loginUser(binding?.etEmail?.text.toString(), binding?.etPassword?.text.toString())
+            if(loginViewModel.checkEmail(email.toString()) and loginViewModel.checkPassword(password.toString())){
+                loginUser(binding?.etEmail?.text.toString(), binding?.etPassword?.text.toString())
+            }else{
+                if(!loginViewModel.checkEmail(email.toString())) binding?.etEmail?.setError(loginViewModel.errorMessageEmail.value)
+                if(!loginViewModel.checkPassword(password.toString())) binding?.etPassword?.setError(loginViewModel.errorMessagePass.value)
+            }
+
         }
 
         binding?.btnSignUp?.setOnClickListener {
@@ -139,10 +177,7 @@ class LoginFragment : Fragment() {
         val credential = GoogleAuthProvider.getCredential(account.idToken , null)
         auth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful){
-                val intent : Intent = Intent(requireActivity() , MainActivity::class.java)
-                intent.putExtra("email" , account.email)
-                intent.putExtra("name" , account.displayName)
-                startActivity(intent)
+                actionLoggedIn()
             }else{
                 Toast.makeText(context, it.exception.toString() , Toast.LENGTH_SHORT).show()
 

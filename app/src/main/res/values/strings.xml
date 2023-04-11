@@ -14,11 +14,12 @@
     <string name="login_failed">"Login failed"</string>
 
     <!--Facebook Auth String Resources-->
-    <string name="facebook_app_id">244723501287864</string>
-    <string name="fb_login_protocol_scheme">244723501287864</string>
+    <string name="facebook_app_id_custom">244723501287864</string>
+    <string name="fb_login_protocol_scheme">fb244723501287864</string>
     <string name="facebook_client_token">93d4a7f900673452ec5cce6dae684bd8</string>
 
-
+    <string name="sign_out">Sign Out</string>
+    <string name="home">Home</string>
 
 
 </resources>

@@ -46,8 +46,7 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_home,
-                R.id.navigation_categories,
-                R.id.navigation_notifications
+                R.id.navigation_categories
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -61,10 +60,6 @@ class MainActivity : AppCompatActivity() {
                     supportActionBar?.show()
                 }
                 R.id.navigation_categories -> {
-                    navView.visibility = View.VISIBLE
-                    supportActionBar?.show()
-                }
-                R.id.navigation_notifications -> {
                     navView.visibility = View.VISIBLE
                     supportActionBar?.show()
                 }

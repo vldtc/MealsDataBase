@@ -2,6 +2,7 @@ package com.example.mealsdatabase.data.model.categories
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class CategoryModel(
     @SerializedName("idCategory")
@@ -12,4 +13,4 @@ data class CategoryModel(
     val strCategoryDescription: String? = "",
     @SerializedName("strCategoryThumb")
     val strCategoryThumb: String? = ""
-)
+) : Serializable
