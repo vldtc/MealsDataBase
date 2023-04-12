@@ -1,4 +1,4 @@
-package com.example.mealsdatabase.ui.home
+package com.example.mealsdatabase.ui.login.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,4 +1,4 @@
-package com.example.mealsdatabase.ui.home
+package com.example.mealsdatabase.ui.login.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
